@@ -114,14 +114,60 @@ public class CodeFormatter {
             
             case '(': {
                 hasParenthesis = findParenthesis(sb.substring(0, index));
+                if (index >= 1) {
+                    if (sb.charAt(index - 1) != ' ') {
+                        res.append(' ');
+                    }
+                }
                 res.append(c);
                 break;
             }
+            
             case ')': {
                 if (hasParenthesis) {
                     hasParenthesis = false;
                 }
                 res.append(c);
+                if (sb.length() - 1 > index) {
+                    if ((sb.charAt(index + 1) != ' ') && (sb.charAt(index + 1) != ';') && (sb.charAt(index + 1) != '{')) {
+                        res.append(' ');
+                    }
+                }
+                break;
+            }
+            
+            case '+': {
+                if (index > 0) {
+                    if (sb.charAt(index - 1) != '+') {
+                        if (sb.charAt(index - 1) != ' ') {
+                            res.append(' ');
+                        }
+                    }
+
+                }
+                res.append(c);
+                if (index < sb.length() - 1) {
+                    if ((sb.charAt(index + 1) != '+') && (sb.charAt(index + 1) != '=') && (sb.charAt(index + 1) != ' ')) {
+                        res.append(' ');
+                    }
+                }
+                break;
+            }
+            
+            case '-': {
+                if (index > 0) {
+                    if ((sb.charAt(index - 1) != ' ') && (sb.charAt(index + 1) != '-')) {
+                        if (sb.charAt(index - 1) != '-') {
+                            res.append(' ');
+                        }
+                    }
+                }
+                res.append(c);
+                if (sb.length() - 1 > index) {
+                    if ((sb.charAt(index + 1) != '=') && (sb.charAt(index + 1) != ' ') && (sb.charAt(index + 1) != '-')) {
+                        res.append(' ');
+                    }
+                }
                 break;
             }
 
