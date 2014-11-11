@@ -1,0 +1,1 @@
+public static void main (String[] args){ Example ex = new Example ();String l = ex.myExample (a);     if ( 10 < 234) {    return true;        }if (345346 >= 15) {return true;   }if (3 += 1) { int y = 5;return false;        }for (int i =1; i >0; i-- )  {}          System.out.println (ex.show);}
