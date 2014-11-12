@@ -1,10 +1,8 @@
 package com.imit.codeformatter;
 
 import java.io.*;
-//import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-//import java.util.Scanner;
 
 public class CodeFormatter {
 
@@ -36,7 +34,6 @@ public class CodeFormatter {
         for (String str : list) {
             readyCode.add(cf.modifiedString(str));
         }
-
 
         Writer fwr = new FileWriter(readyCode);
 

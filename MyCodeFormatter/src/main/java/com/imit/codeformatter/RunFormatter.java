@@ -142,17 +142,16 @@ public class RunFormatter {
 
             case '+': {
                 if (index > 0) {
-                    if (sb.charAt(index - 1) != '+') {
-                        if (sb.charAt(index - 1) != ' ') {
+                    if ((sb.charAt(index - 1) != ' ') && (sb.charAt(index + 1) != '+')) {
+                        if (sb.charAt(index - 1) != '+') {
                             res.append(' ');
                         }
                     }
-
                 }
                 res.append(c);
-                if (index < sb.length() - 1) {
-                    if ((sb.charAt(index + 1) != '+') && (sb.charAt(index + 1) != '=') &&
-                            (sb.charAt(index + 1) != ' ')) {
+                if (sb.length() - 1 > index) {
+                    if ((sb.charAt(index + 1) != '=') && (sb.charAt(index + 1) != ' ') &&
+                            (sb.charAt(index + 1) != '+')) {
                         res.append(' ');
                     }
                 }
