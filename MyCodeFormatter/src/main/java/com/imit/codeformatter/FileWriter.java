@@ -1,13 +1,9 @@
 package com.imit.codeformatter;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-/**
- * Created by Alexey on 11.11.2014.
- */
 public class FileWriter implements Writer{
 
     List<String> data = null;

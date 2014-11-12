@@ -1,6 +1,5 @@
 package com.imit.codeformatter;
 
-//import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 //import java.io.PrintWriter;
@@ -10,9 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by Alexey on 11.11.2014.
- */
 public class RunFormatter {
 
     private StringBuilder sb = null;
