@@ -3,18 +3,21 @@ package com.imit.codeformatter;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class CodeFormatter {
 
+    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+
     public static void main(final String[] args) {
 
+        PropertyConfigurator.configure("src/main/resources/log4j.xml");
+
         if (args.length != 2) {
-            System.err.println("The program uses:");
-            System.err.println("CodeFormatter input_file output_file");
-            System.exit(1);
+            logger.error(String.format("The program uses: CodeFormatter input_file output_file"));
         }
 
-        RunFormatter cf = new RunFormatter();
         Reader fr = new FileReader();
 
         File input = new File(args[0]);
@@ -24,12 +27,24 @@ public class CodeFormatter {
 
         List<String> list = new ArrayList();
 
+        BufferedReader br = null;
         try {
-            list = fr.read(new BufferedReader(new java.io.FileReader(input)));
+            logger.info(String.format("Started to read the file: %s", input));
+            br = new BufferedReader(new java.io.FileReader(input));
+            if(br != null) {
+                list = fr.read(br);
+            }
         } catch (IOException e) {
-            System.out.println("Something wrong in file:" + input);
+            logger.error(String.format("Something wrong in file: %s", input), e);
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                logger.error("Something wrong in stream: ", e);
+            }
         }
 
+        RunFormatter cf = new RunFormatter();
         List<String> readyCode = new ArrayList();
         for (String str : list) {
             readyCode.add(cf.modifiedString(str));
@@ -40,7 +55,7 @@ public class CodeFormatter {
         try {
             fwr.write(new BufferedWriter(new java.io.FileWriter(output)));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(String.format("File %s recording failed", output), e);
         }
     }
 

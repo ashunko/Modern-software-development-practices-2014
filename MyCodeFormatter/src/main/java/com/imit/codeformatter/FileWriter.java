@@ -1,5 +1,8 @@
 package com.imit.codeformatter;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.util.List;
@@ -12,9 +15,15 @@ public class FileWriter implements Writer{
         this.data = list;
     }
 
+    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+
     @Override
     public void write(BufferedWriter bw) {
+
+        PropertyConfigurator.configure("src/main/resources/log4j.xml");
+
         if (bw == null) {
+            logger.error("Out stream is null");
             throw new NullPointerException("out stream is null");
         }
         PrintWriter out = new PrintWriter(bw);
@@ -31,28 +40,3 @@ public class FileWriter implements Writer{
     }
 
 }
-
-
-
-/*    public void writeFile(final List<String> list, final String[] args) {
-
-        PrintWriter out = null;
-
-        try {
-            out = new PrintWriter(new BufferedWriter(new java.io.FileWriter(args[1])));
-            for (String s : list) {
-                String[] sf = s.split("\n");
-                for (String sw : sf) {
-                    out.print(sw);
-                    out.println();
-                }
-            }
-            out.println();
-        } catch (IOException ex) {
-            System.out.println("Something wrong with a writing to file" + args[1]);
-        } finally {
-            out.close();
-        }
-    }*/
-
-

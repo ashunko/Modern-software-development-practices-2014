@@ -14,9 +14,7 @@ public class StringWriter implements Writer{
 
     @Override
     public void write(BufferedWriter bw) {
-        if (bw == null) {
-            throw new NullPointerException("out stream is null");
-        }
+
         PrintWriter out = new PrintWriter(bw);
         out = new PrintWriter(bw);
         for (String s : data) {
