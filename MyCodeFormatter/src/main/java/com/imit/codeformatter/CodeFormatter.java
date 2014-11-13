@@ -1,15 +1,87 @@
 package com.imit.codeformatter;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+/**
+ * The main CodeFormatter class
+ */
 public class CodeFormatter {
 
     private static final Logger logger = Logger.getLogger(CodeFormatter.class);
 
+    /**
+     * read input file
+     * @param input - input file
+     * @return list of lines of the file
+     */
+    public List<String> readInput(final File input) {
+
+        List<String> list = new ArrayList();
+        Reader fileReader = new FileReader();
+
+        BufferedReader bufReader = null;
+        try {
+            logger.info(String.format("Started to read the file: %s", input));
+            bufReader = new BufferedReader(new java.io.FileReader(input));
+            if (bufReader != null) {
+                list = fileReader.read(bufReader);
+            }
+        } catch (IOException e) {
+            logger.error(String.format("Something wrong in file: %s", input), e);
+        } finally {
+            try {
+                bufReader.close();
+            } catch (IOException e) {
+                logger.error("Something wrong in stream: ", e);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * formatting source code
+     * @param inputCode - input code
+     * @return list of lines of the ready code
+     */
+    public List<String> formatCode(final List<String> inputCode) {
+
+        RunFormatter runFormatter = new RunFormatter();
+        List<String> readyCode = new ArrayList();
+        for (String str : inputCode) {
+            readyCode.add(runFormatter.modifiedString(str));
+        }
+        return readyCode;
+    }
+
+    /**
+     * write output file
+     * @param readyCode - ready code
+     * @param output - output file
+     */
+    public void writeOutput(final List<String> readyCode, final File output) {
+
+        Writer fileWriter = new FileWriter(readyCode);
+
+        try {
+            fileWriter.write(new BufferedWriter(new java.io.FileWriter(output)));
+        } catch (IOException e) {
+            logger.error(String.format("File %s recording failed", output), e);
+        }
+
+    }
+
+    /**
+     * The main function of CodeFormatter
+     * @param args - arguments for the project
+     */
     public static void main(final String[] args) {
 
         PropertyConfigurator.configure("src/main/resources/log4j.xml");
@@ -18,45 +90,14 @@ public class CodeFormatter {
             logger.error(String.format("The program uses: CodeFormatter input_file output_file"));
         }
 
-        Reader fr = new FileReader();
-
         File input = new File(args[0]);
         File output = new File(args[1]);
 
+        CodeFormatter codeFormatter = new CodeFormatter();
+        List<String> inputCode = codeFormatter.readInput(input);
+        List<String> readyCode = codeFormatter.formatCode(inputCode);
+        codeFormatter.writeOutput(readyCode, output);
 
-
-        List<String> list = new ArrayList();
-
-        BufferedReader br = null;
-        try {
-            logger.info(String.format("Started to read the file: %s", input));
-            br = new BufferedReader(new java.io.FileReader(input));
-            if(br != null) {
-                list = fr.read(br);
-            }
-        } catch (IOException e) {
-            logger.error(String.format("Something wrong in file: %s", input), e);
-        } finally {
-            try {
-                br.close();
-            } catch (IOException e) {
-                logger.error("Something wrong in stream: ", e);
-            }
-        }
-
-        RunFormatter cf = new RunFormatter();
-        List<String> readyCode = new ArrayList();
-        for (String str : list) {
-            readyCode.add(cf.modifiedString(str));
-        }
-
-        Writer fwr = new FileWriter(readyCode);
-
-        try {
-            fwr.write(new BufferedWriter(new java.io.FileWriter(output)));
-        } catch (IOException e) {
-            logger.error(String.format("File %s recording failed", output), e);
-        }
     }
 
 }

@@ -7,12 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReader implements Reader{
+/**
+ * class read data from the file
+ */
+public class FileReader implements Reader {
 
     private static final Logger logger = Logger.getLogger(CodeFormatter.class);
 
+    /**
+     * read data from the file
+     * @param in - file buffer
+     */
     @Override
-    public List<String> read(BufferedReader in){
+    public List<String> read(final BufferedReader in) {
 
         PropertyConfigurator.configure("src/main/resources/log4j.xml");
 

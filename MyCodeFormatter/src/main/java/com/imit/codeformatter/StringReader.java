@@ -8,12 +8,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringReader implements Reader{
+/**
+ * class read data from the string
+ */
+public class StringReader implements Reader {
 
     private static final Logger logger = Logger.getLogger(CodeFormatter.class);
 
+    /**
+     * read data from the string
+     * @param in - string buffer
+     */
     @Override
-    public List<String> read(BufferedReader in){
+    public List<String> read(final BufferedReader in) {
 
         PropertyConfigurator.configure("src/main/resources/log4j.xml");
 

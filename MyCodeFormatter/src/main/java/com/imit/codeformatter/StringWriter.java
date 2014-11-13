@@ -4,19 +4,30 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class StringWriter implements Writer{
+/**
+ * class write data from the string
+ */
+public class StringWriter implements Writer {
 
-    List<String> data = null;
+    private List<String> data = null;
 
-    public StringWriter(List<String> list) {
+    /**
+     * construct of StringWriter class
+     * @param list - list of ready code
+     */
+    public StringWriter(final List<String> list) {
         this.data = list;
     }
 
+    /**
+     * write data from the string
+     * @param bufWriter - file buffer
+     */
     @Override
-    public void write(BufferedWriter bw) {
+    public void write(final BufferedWriter bufWriter) {
 
-        PrintWriter out = new PrintWriter(bw);
-        out = new PrintWriter(bw);
+        PrintWriter out = new PrintWriter(bufWriter);
+        out = new PrintWriter(bufWriter);
         for (String s : data) {
             String[] sf = s.split("\n");
             for (String sw : sf) {
