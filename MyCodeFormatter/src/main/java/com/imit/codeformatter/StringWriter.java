@@ -28,10 +28,10 @@ public class StringWriter implements Writer {
 
         PrintWriter out = new PrintWriter(bufWriter);
         out = new PrintWriter(bufWriter);
-        for (String s : data) {
-            String[] sf = s.split("\n");
-            for (String sw : sf) {
-                out.print(sw);
+        for (String newStr : data) {
+            String[] strMas = newStr.split("\n");
+            for (String readyStr : strMas) {
+                out.print(readyStr);
                 out.println();
             }
         }

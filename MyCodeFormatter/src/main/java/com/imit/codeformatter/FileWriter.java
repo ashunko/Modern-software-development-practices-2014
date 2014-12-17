@@ -21,7 +21,7 @@ public class FileWriter implements Writer {
         this.data = list;
     }
 
-    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+    private static final Logger LOGGER = Logger.getLogger(CodeFormatter.class);
 
     /**
      * write data from the file
@@ -33,15 +33,15 @@ public class FileWriter implements Writer {
         PropertyConfigurator.configure("src/main/resources/log4j.xml");
 
         if (bufWriter == null) {
-            logger.error("Out stream is null");
+            LOGGER.error("Out stream is null");
             throw new NullPointerException("out stream is null");
         }
         PrintWriter out = new PrintWriter(bufWriter);
         out = new PrintWriter(bufWriter);
-        for (String s : data) {
-            String[] sf = s.split("\n");
-            for (String sw : sf) {
-                out.print(sw);
+        for (String newStr : data) {
+            String[] strMas = newStr.split("\n");
+            for (String readyStr : strMas) {
+                out.print(readyStr);
                 out.println();
             }
         }

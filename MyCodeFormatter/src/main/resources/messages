@@ -1,6 +1,1 @@
-2014-11-13 03:51:51 INFO  CodeFormatter:34 - [public static void main (String[] args){ Example ex = new Example ();String l = ex.myExample (a);     if ( 10 < 234) {    return true;        }if (345346 >= 15) {return true;   }if (3 += 1) { int y = 5;return false;        }for (int i =1; i >0; i-- )  {}          System.out.println (ex.show);}]
-2014-11-13 14:20:51 INFO  CodeFormatter:32 - Started to read the file: .\src\main\resources\input.txt
-2014-11-13 14:26:56 INFO  CodeFormatter:32 - Started to read the file: .\src\main\resources\input.txt
-2014-11-13 14:32:23 ERROR CodeFormatter:18 - The program uses: CodeFormatter input_file output_file
-2014-11-13 14:33:18 INFO  CodeFormatter:32 - Started to read the file: .\src\main\resources\input.txt
-2014-11-13 14:40:43 INFO  CodeFormatter:32 - Started to read the file: .\src\main\resources\input.txt
+2014-12-17 00:25:17 INFO  CodeFormatter:32 - Started to read the file: .\src\main\resources\input.txt

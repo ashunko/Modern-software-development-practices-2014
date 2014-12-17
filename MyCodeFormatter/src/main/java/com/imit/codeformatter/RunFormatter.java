@@ -9,8 +9,8 @@ public class RunFormatter {
 
     private StringBuilder stringBuild = null;
     private boolean hasParenthesis = false;
-    private boolean NewString = false;
-    private boolean NewStringAtFile = false;
+    private boolean newString = false;
+    private boolean newStringAtFile = false;
     private int tab = 0;
     private final int indentSize = 4;
     private final char symbolIndentation = ' ';
@@ -24,13 +24,11 @@ public class RunFormatter {
     public boolean nextSymbol(final String str, final char symbol) {
         for (char c : str.toCharArray()) {
             if (c == ' ') {
-
-            } else {
-                if (c == symbol) {
-                    return true;
-                } else {
-                    return false;
-                }
+                break;
+            } else if (c == symbol) {
+                return true;
+            } else if ((c != ' ') && (c != symbol)) {
+                return false;
             }
         }
         return false;
@@ -43,12 +41,11 @@ public class RunFormatter {
      */
     public boolean findParenthesis(final String str) {
         for (int i = str.length() - 1; i > 0; i--) {
-            if (str.charAt(i) != ' ') {
-                if (str.charAt(i) == 'r') {
-                    return true;
-                } else {
-                    return false;
-                }
+
+            if ((str.charAt(i) != ' ') && (str.charAt(i) == 'r')) {
+                return true;
+            } else if ((str.charAt(i) != ' ') && (str.charAt(i) != 'r')) {
+                return false;
             }
         }
         return false;
@@ -63,7 +60,7 @@ public class RunFormatter {
         StringBuilder res = new StringBuilder();
         switch (symbol) {
 
-            case '{': {
+            case '{':
                 if ((index != stringBuild.length() - 1) && (stringBuild.charAt(index + 1) == '}')) {
                     res.append(symbol);
                     break;
@@ -75,15 +72,13 @@ public class RunFormatter {
                     this.tab++;
                     if (stringBuild.length() - 1 != index) {
                         res.append('\n');
-                        NewString = true;
+                        newString = true;
                         break;
                     }
                     break;
                 }
 
-            }
-
-            case ';': {
+            case ';':
                 if (hasParenthesis) {
                     res.append(symbol);
                     if (stringBuild.charAt(index + 1) != ' ') {
@@ -94,25 +89,24 @@ public class RunFormatter {
                 if (index != (stringBuild.length() - 1)) {
                     if (nextSymbol(stringBuild.substring(index + 1), '}')) {
                         res.append(symbol).append('\n');
-                        NewString = true;
+                        newString = true;
                     } else {
                         res.append(symbol).append('\n');
-                        NewString = true;
+                        newString = true;
                     }
                     break;
                 } else {
                     res.append(symbol);
                     break;
                 }
-            }
 
-            case '}': {
+            case '}':
                 if ((index > 1) && (stringBuild.charAt(index - 1) == '{')) {
                     res.append(symbol);
                     if (stringBuild.length() - 1 != index) {
                         res.delete(0, res.length());
                         res.append("Down!Brace!");
-                        NewString = true;
+                        newString = true;
                         break;
                     }
                     break;
@@ -122,14 +116,13 @@ public class RunFormatter {
                     if (stringBuild.length() - 1 != index) {
                         res.delete(0, res.length());
                         res.append("Down!Brace!N");
-                        NewString = true;
+                        newString = true;
                         break;
                     }
                 }
                 break;
-            }
 
-            case '(': {
+            case '(':
                 hasParenthesis = findParenthesis(stringBuild.substring(0, index));
                 if (index >= 1) {
                     if (stringBuild.charAt(index - 1) != ' ') {
@@ -138,9 +131,8 @@ public class RunFormatter {
                 }
                 res.append(symbol);
                 break;
-            }
 
-            case ')': {
+            case ')':
                 if (hasParenthesis) {
                     hasParenthesis = false;
                 }
@@ -152,9 +144,8 @@ public class RunFormatter {
                     }
                 }
                 break;
-            }
 
-            case '+': {
+            case '+':
                 if (index > 0) {
                     if ((stringBuild.charAt(index - 1) != ' ') && (stringBuild.charAt(index + 1) != '+')) {
                         if (stringBuild.charAt(index - 1) != '+') {
@@ -170,9 +161,8 @@ public class RunFormatter {
                     }
                 }
                 break;
-            }
 
-            case '-': {
+            case '-':
                 if (index > 0) {
                     if ((stringBuild.charAt(index - 1) != ' ') && (stringBuild.charAt(index + 1) != '-')) {
                         if (stringBuild.charAt(index - 1) != '-') {
@@ -188,11 +178,9 @@ public class RunFormatter {
                     }
                 }
                 break;
-            }
 
-            default: {
+            default:
                 res.append(symbol);
-            }
         }
         return res.toString();
     }
@@ -220,63 +208,63 @@ public class RunFormatter {
 
         this.stringBuild = new StringBuilder(str.trim());
         StringBuilder result = new StringBuilder();
-        String for_help;
+        String forHelp;
 
-        NewStringAtFile = true;
+        newStringAtFile = true;
         for (int i = 0; i < stringBuild.length(); i++) {
-            if (NewStringAtFile) {
+            if (newStringAtFile) {
                 if ((stringBuild.length() == 1) && (stringBuild.charAt(i) == '}')) {
                     this.tab--;
                     result.append(getTab());
                     result.append(stringBuild.charAt(i));
                 } else {
                     result.append(getTab());
-                    if (NewString) {
+                    if (newString) {
                         String tmp;
                         tmp = stringBuild.substring(i, stringBuild.length());
                         stringBuild = new StringBuilder(tmp.trim());
                         i = 0;
                         result.append(getTab());
                     }
-                    NewString = false;
+                    newString = false;
                     char symbol = stringBuild.charAt(i);
-                    for_help = witchSymbol(symbol, i);
-                    if (for_help.equals("Down!Brace")) {
+                    forHelp = witchSymbol(symbol, i);
+                    if (forHelp.equals("Down!Brace")) {
                         result.delete(result.length() - indentSize, result.length());
                         result.append(symbol);
-                    } else if (for_help.equals("Down!Brace!")) {
+                    } else if (forHelp.equals("Down!Brace!")) {
                         result.append(symbol + "\n");
-                    } else if (for_help.equals("Down!Brace!N")) {
+                    } else if (forHelp.equals("Down!Brace!N")) {
                         result.delete(result.length() - indentSize, result.length());
                         result.append(symbol + "\n");
                     } else {
 
-                        result.append(for_help);
+                        result.append(forHelp);
                     }
                 }
-                NewStringAtFile = false;
+                newStringAtFile = false;
             } else {
-                if (NewString) {
+                if (newString) {
                     String tmp;
                     tmp = stringBuild.substring(i, stringBuild.length());
                     stringBuild = new StringBuilder(tmp.trim());
                     i = 0;
                     result.append(getTab());
                 }
-                NewString = false;
+                newString = false;
                 char symbol = stringBuild.charAt(i);
-                for_help = witchSymbol(symbol, i);
-                if (for_help.equals("Down!Brace")) {
+                forHelp = witchSymbol(symbol, i);
+                if (forHelp.equals("Down!Brace")) {
                     result.delete(result.length() - indentSize, result.length());
                     result.append(symbol);
-                } else if (for_help.equals("Down!Brace!")) {
+                } else if (forHelp.equals("Down!Brace!")) {
                     result.append(symbol + "\n");
-                } else if (for_help.equals("Down!Brace!N")) {
+                } else if (forHelp.equals("Down!Brace!N")) {
                     result.delete(result.length() - indentSize, result.length());
                     result.append(symbol + "\n");
                 } else {
 
-                    result.append(for_help);
+                    result.append(forHelp);
                 }
 
             }

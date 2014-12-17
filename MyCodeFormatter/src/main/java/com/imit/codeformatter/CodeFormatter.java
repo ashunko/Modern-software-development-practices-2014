@@ -15,7 +15,7 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class CodeFormatter {
 
-    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+    private static final Logger LOGGER = Logger.getLogger(CodeFormatter.class);
 
     /**
      * read input file
@@ -29,18 +29,18 @@ public class CodeFormatter {
 
         BufferedReader bufReader = null;
         try {
-            logger.info(String.format("Started to read the file: %s", input));
+            LOGGER.info(String.format("Started to read the file: %s", input));
             bufReader = new BufferedReader(new java.io.FileReader(input));
             if (bufReader != null) {
                 list = fileReader.read(bufReader);
             }
         } catch (IOException e) {
-            logger.error(String.format("Something wrong in file: %s", input), e);
+            LOGGER.error(String.format("Something wrong in file: %s", input), e);
         } finally {
             try {
                 bufReader.close();
             } catch (IOException e) {
-                logger.error("Something wrong in stream: ", e);
+                LOGGER.error("Something wrong in stream: ", e);
             }
         }
         return list;
@@ -73,7 +73,7 @@ public class CodeFormatter {
         try {
             fileWriter.write(new BufferedWriter(new java.io.FileWriter(output)));
         } catch (IOException e) {
-            logger.error(String.format("File %s recording failed", output), e);
+            LOGGER.error(String.format("File %s recording failed", output), e);
         }
 
     }
@@ -87,7 +87,7 @@ public class CodeFormatter {
         PropertyConfigurator.configure("src/main/resources/log4j.xml");
 
         if (args.length != 2) {
-            logger.error(String.format("The program uses: CodeFormatter input_file output_file"));
+            LOGGER.error(String.format("The program uses: CodeFormatter input_file output_file"));
         }
 
         File input = new File(args[0]);

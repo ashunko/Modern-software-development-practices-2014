@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class StringReader implements Reader {
 
-    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+    private static final Logger LOGGER = Logger.getLogger(CodeFormatter.class);
 
     /**
      * read data from the string
@@ -31,7 +31,7 @@ public class StringReader implements Reader {
                     list.add(line);
                 }
             } catch (IOException e) {
-                logger.error("Impossible to read the stream: ", e);
+                LOGGER.error("Impossible to read the stream: ", e);
                 e.printStackTrace();
             }
         return list;

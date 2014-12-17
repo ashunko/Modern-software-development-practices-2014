@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class FileReader implements Reader {
 
-    private static final Logger logger = Logger.getLogger(CodeFormatter.class);
+    private static final Logger LOGGER = Logger.getLogger(CodeFormatter.class);
 
     /**
      * read data from the file
@@ -25,7 +25,7 @@ public class FileReader implements Reader {
 
         List<String> list = new ArrayList();
         if (in == null) {
-            logger.error("Stream is null");
+            LOGGER.error("Stream is null");
             throw new NullPointerException("Stream is null");
         } else {
             String line = null;
@@ -34,7 +34,7 @@ public class FileReader implements Reader {
                     list.add(line);
                 }
             } catch (IOException e) {
-                logger.error("Impossible to read the stream: ", e);
+                LOGGER.error("Impossible to read the stream: ", e);
                 e.printStackTrace();
             }
         }
