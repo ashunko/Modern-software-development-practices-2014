@@ -1,0 +1,252 @@
+@import "less/bootstrap.less";
+@import "variables.less";
+
+html {
+  //height: 100%;
+}
+
+.head {
+  height: 220px;                              //Высота шапки
+}
+
+p {
+  margin: 20px 0;                             //Отступ сверху
+}
+
+body {
+  border-top: 5px solid #7e7e7e; //Отступ сверху определённого цвета
+  //background-color: @body-bg; //Цвет фона
+  background-image: url(/images/bg.png);
+  //height: 100%;
+  //position: relative;
+}
+
+.navbar a {
+  //text-transform: uppercase;
+  color: @text-color;
+  font: 14px @brand-font;
+}
+
+/*body .navbar a {
+  color: @navbar-default-link-color;
+  font: 14px @brand-font;
+}
+
+body .navbar a:hover {
+  background-color: @panel-bg;
+  color: lightblue;//@navbar-default-active-link-color;
+  font: 14px @brand-font;
+}
+
+body .navbar {
+  background-color: @panel-bg;
+  //border: 3px solid #A952A0;
+}*/
+
+.short_news {
+  padding-left: 15px;
+  padding-right: 0px;
+}
+.short_news .border {
+  border: 1px solid @panel-inner-border;//#A952A0;//3px solid @short-news-border-color;
+  //border-color: @short-news-border-color;
+  //border-radius: 5px;
+  background-color: @panel-bg;
+  font: @brand-font;
+}
+
+.preview_latest {
+  padding-left: 0;
+}
+
+.title_news {
+  border-bottom: 3px solid @brand-primary;//darkblue;//#A952A0;
+  font: 14px @brand-font;
+}
+
+.title_news b {
+  font: 20px @brand-font;
+}
+
+.title_news img {
+  height: 150px;
+  width: 150px;
+}
+
+.title_news p {
+  font: 40px @brand-font;
+}
+
+//.title_news_main {
+  //font: 14px @brand-font;
+//}
+
+.title_news_main {font: 14px @brand-font;}
+.title_news_main img {
+  height: 150px;
+  width: 150px;
+  padding:0 20px 20px 0;
+}
+
+.submenu {
+  margin-bottom: 30px;
+  padding-left: 0px;
+  padding-right: 15px;
+}
+
+.submenu li {
+  display: list-item;
+  font: 300 14px @brand-font;
+  list-style-position: inside;
+  list-style-type: square;
+  padding: 10px;
+  color: @brand-primary;
+  //text-transform: uppercase;
+}
+
+.submenu li.active {
+  color: @brand-primary;
+  background-color: @brand-primary;
+}
+
+.submenu li a {
+  color: @text-color;
+  text-decoration: none;
+}
+
+.submenu li a:hover {
+  color: @text-color;
+}
+
+.menu a {
+  //color: black;
+}
+
+.menu {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+/*body .btn-primary {
+  background-color: blue;//#a952a0;
+  border-color: blue;// #a952a0;
+  color: #fff;
+}
+
+body .btn-primary:hover {
+  background-color: darkblue;
+  border-color: darkblue;
+  color: #fff;
+} */
+
+//body .form-control:focus {
+//  border-color: darkblue;
+//}
+
+body a {
+  color: @text-color;//darkblue;//#a952a0;
+}
+
+body a:hover {
+  text-decoration: none;
+  color: @brand-primary;//darkblue;//#a952a0;
+}
+
+.container .jumbotron {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+body .jumbotron {
+  border-radius: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+body .jumbotron blockquote {
+  border-left: none;
+}
+
+body .jumbotron blockquote p {
+  font: 300 italic 33px @brand-font;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+body .jumbotron blockquote small {
+  text-align: right;
+  color: #1D8EA6;
+  font: 300 20px @brand-font;
+}
+
+body .jumbotron blockquote small:before {
+  content: '';
+}
+
+footer {
+  border-top: 3px solid @brand-primary;
+
+  background: #7e7e7e;
+  color: #dbdbdb;
+  font-size: 11px;
+  height: 111px;
+  padding: 10px 0;
+  width: 100%;
+  //bottom: 0px;
+  //position: absolute;
+}
+
+footer .container h3 {
+  border-bottom: 1px solid #919191;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 21px;
+  font-family: @brand-font;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+footer .container p {
+  margin: 5px 0;
+}
+
+footer .container .twitter p {
+  padding-right: 15px;
+}
+
+footer .container .twitter time a {
+  color: #b4aeae;
+  text-decoration: underline;
+}
+
+footer .container a {
+  color: #dbdbdb;
+}
+
+footer .container .sitemap a {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+footer .container .footer-logo {
+  bottom: -90px;
+  float: right;
+  font-size: 11px;
+  text-align: right;
+}
+
+footer .container .footer-logo a {
+  text-decoration: underline;
+}
+
+.clear {
+  clear:both;
+}
+
+.form-search {
+  width: 250px;
+}
